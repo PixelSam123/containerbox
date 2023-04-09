@@ -26,6 +26,6 @@ This is meant to be used with `pcp`, but feel free to use it for any other purpo
    ```json
    {
      "status": number,
-     "stdout": "string"
+     "output": "string"
    }
    ```
