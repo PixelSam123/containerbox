@@ -28,7 +28,7 @@ description = "Use a Docker host to execute requested code in containers"
 authors = [
     { name = "PixelSam123", email = "77851256+PixelSam123@users.noreply.github.com" },
 ]
-dependencies = ["fastapi[all]>=0.95.0", "docker>=6.0.1"]
+dependencies = ["fastapi>=0.95.0", "uvicorn[standard]>=0.21.0", "docker>=6.0.1"]
 requires-python = ">=3.11"
 readme = "README.md"
 license = { text = "GPL-3.0" }
