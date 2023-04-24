@@ -17,28 +17,32 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python version
-        uses: actions/setup-python@v1
+      - name: Setup PDM (Python Dependency Manager)
+        uses: pdm-project/setup-pdm@v3
         with:
-          python-version: '3.11'
+          python-version: 3.11
+          architecture: x64
+          version: 2.5.0
 
-      - name: Create and start virtual environment
+      - name: Create virtual environment, install dependencies and start it
         run: |
-          python -m venv venv
-          source venv/bin/activate
-      
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-        
+          pdm sync
+          pdm venv activate
+
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-      
+
+      - name: Generate requirements.txt
+        run: |
+          pdm export -o requirements.txt
+
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
           name: python-app
           path: |
             . 
-            !venv/
+            !.venv/
+            !build/
 
   deploy:
     runs-on: ubuntu-latest
